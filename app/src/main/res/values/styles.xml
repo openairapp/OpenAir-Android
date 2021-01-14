@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PaddedStatsContainer">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="ExerciseLabels">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <style name="StatsTotals">
+        <item name="android:layout_marginStart">16dp</item>
+    </style>
+</resources>

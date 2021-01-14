@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="app.openair">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FitnessTracker">
+        <activity android:name="app.openair.ui.feature.showSingleExercise.EditExerciseActivity" />
+        <activity android:name="app.openair.ui.feature.showSingleExercise.ShowExerciseDetailsActivity" />
+        <activity android:name="app.openair.ui.feature.recordExercise.SetupExerciseActivity" />
+        <activity
+            android:name="app.openair.ui.feature.recordExercise.TrackExerciseActivity"
+            android:parentActivityName="app.openair.ui.feature.main.MainActivity" />
+        <activity android:name="app.openair.ui.feature.recordExercise.FinalizeExerciseActivity" />
+        <activity
+            android:name="app.openair.ui.feature.main.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.FitnessTracker.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${mapsApiKey}" />
+
+        <service
+            android:name="app.openair.ui.feature.recordExercise.RecordService"
+            android:foregroundServiceType="location" />
+    </application>
+
+</manifest>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.feature.showStats.ShowStatsFragment">
+
+        <TextView
+            android:id="@+id/periodSelector_label_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/showStats_periodSelector_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/periodSelector_RadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/periodSelector_label_TextView">
+
+            <RadioButton
+                android:id="@+id/periodSelector_RadioButton_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/showStats_periodSelector_day" />
+
+            <RadioButton
+                android:id="@+id/periodSelector_RadioButton_week"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/showStats_periodSelector_week" />
+
+            <RadioButton
+                android:id="@+id/periodSelector_RadioButton_month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/showStats_periodSelector_month" />
+
+            <RadioButton
+                android:id="@+id/periodSelector_RadioButton_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/showStats_periodSelector_year" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/chart_distance_label"
+            style="@style/ExerciseLabels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/showStats_chart_distance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/periodSelector_RadioGroup" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart_distance"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/chart_distance_label" />
+
+        <TextView
+            android:id="@+id/total_distance_label"
+            style="@style/StatsTotals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/showStats_distance_total"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart_distance" />
+
+        <TextView
+            android:id="@+id/total_distance_value"
+            style="@style/StatsTotals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/total_distance_label"
+            app:layout_constraintTop_toTopOf="@+id/total_distance_label" />
+
+        <TextView
+            android:id="@+id/chart_duration_label"
+            style="@style/ExerciseLabels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/showStats_chart_duration"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/total_distance_label"  />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart_duration"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/chart_duration_label"  />
+
+        <TextView
+            android:id="@+id/total_duration_label"
+            style="@style/StatsTotals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/showStats_duration_total"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart_duration" />
+
+        <TextView
+            android:id="@+id/total_duration_value"
+            style="@style/StatsTotals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/total_duration_label"
+            app:layout_constraintTop_toTopOf="@+id/total_duration_label" />
+
+        <TextView
+            android:id="@+id/chart_elevationGain_label"
+            style="@style/ExerciseLabels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/showStats_chart_elevation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/total_duration_label" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart_elevationGain"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/chart_elevationGain_label"  />
+
+        <TextView
+            android:id="@+id/total_elevationGain_label"
+            style="@style/StatsTotals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/showStats_elevation_total"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart_elevationGain" />
+
+        <TextView
+            android:id="@+id/total_elevationGain_value"
+            style="@style/StatsTotals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/total_elevationGain_label"
+            app:layout_constraintTop_toTopOf="@+id/total_elevationGain_label" />
+
+        <TextView
+            android:id="@+id/chart_averageSpeed_label"
+            style="@style/ExerciseLabels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/showStats_chart_speed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/total_elevationGain_label" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart_averageSpeed"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/chart_averageSpeed_label" />
+
+        <TextView
+            android:id="@+id/average_speed_label"
+            style="@style/StatsTotals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/showStats_speed_total"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart_averageSpeed" />
+
+        <TextView
+            android:id="@+id/average_speed_value"
+            style="@style/StatsTotals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/average_speed_label"
+            app:layout_constraintTop_toTopOf="@+id/average_speed_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.feature.showSingleExercise.ShowExerciseDetailsActivity">
+
+        <TextView
+            android:id="@+id/exercise_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/exercise_name_EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exercise_date" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mapView_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/exercise_name_EditText">
+
+            <!-- setting height to 0 as a kinda hacky workaround to be able to set the aspect ratio -->
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="1:0.8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:context=".MapsActivity" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/stats_top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/mapView_container" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/centerV_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <LinearLayout
+            android:id="@+id/exercise_distance_container"
+            style="@style/PaddedStatsContainer"
+            app:layout_constraintEnd_toStartOf="@+id/centerV_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stats_top_guideline">
+
+            <TextView
+                android:id="@+id/exercise_distance_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/showExerciseList_recycler_label_distance" />
+
+            <TextView
+                android:id="@+id/exercise_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/exercise_duration_container"
+            style="@style/PaddedStatsContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/centerV_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/stats_top_guideline">
+
+            <TextView
+                android:id="@+id/exercise_duration_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/showExerciseList_recycler_label_duration" />
+
+            <TextView
+                android:id="@+id/exercise_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/stats_centerH_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="exercise_distance_container,exercise_duration_container" />
+
+
+        <LinearLayout
+            android:id="@+id/exercise_elevationGain_container"
+            style="@style/PaddedStatsContainer"
+            app:layout_constraintEnd_toStartOf="@+id/centerV_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stats_centerH_barrier">
+
+            <TextView
+                android:id="@+id/exercise_elevationGain_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/showExerciseList_recycler_label_elevation" />
+
+            <TextView
+                android:id="@+id/exercise_elevationGain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/exercise_speed_container"
+            style="@style/PaddedStatsContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/centerV_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/stats_centerH_barrier">
+
+            <TextView
+                android:id="@+id/exercise_speed_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/showExerciseList_recycler_label_speed" />
+
+            <TextView
+                android:id="@+id/exercise_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/stats_bottomH_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="exercise_elevationGain_container,exercise_speed_container" />
+
+        <LinearLayout
+            android:id="@+id/chart_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/stats_bottomH_barrier">
+
+            <TextView
+                android:id="@+id/chart_elevation_label"
+                style="@style/ExerciseLabels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/showSingleExercise_chart_elevation" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart_elevation"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/chart_speed_label"
+                style="@style/ExerciseLabels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/showSingleExercise_chart_speed" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart_speed"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/exercise_notes_label"
+            style="@style/ExerciseLabels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/showSingleExercise_notes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart_container" />
+
+        <TextView
+            android:id="@+id/exercise_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/exercise_notes_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
