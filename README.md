@@ -14,7 +14,7 @@ OpenAir is a privacy focused fitness tracker. Your data is yours, and we think i
 
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+[See our contributing guidlines](CONTRIBUTING.md)
 
 [Android Studio](https://developer.android.com/studio) is recommended, you'll probably want to generate and add a maps API key as specified in the installation instructions.
 
