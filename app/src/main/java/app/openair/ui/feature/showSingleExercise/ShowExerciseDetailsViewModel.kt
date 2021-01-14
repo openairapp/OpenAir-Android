@@ -12,8 +12,8 @@ import com.google.android.gms.maps.model.LatLng
 class ShowExerciseDetailsViewModel(application: Application) : AndroidViewModel(application) {
 
     companion object {
-        val CHART_POINT_SERIES_ELEVATION = 0
-        val CHART_POINT_SERIES_SPEED = 1
+        const val CHART_POINT_SERIES_ELEVATION = 0
+        const val CHART_POINT_SERIES_SPEED = 1
     }
 
     private var repository: AppRepository = AppRepository(application)

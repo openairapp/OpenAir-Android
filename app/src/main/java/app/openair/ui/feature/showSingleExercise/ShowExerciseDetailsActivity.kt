@@ -22,18 +22,18 @@ import com.google.android.gms.maps.SupportMapFragment
 
 class ShowExerciseDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    companion object {
+        const val EXERCISE_ID_EXTRA = "exerciseId"
+        const val EXERCISE_ID_SAVE_INSTANCE = "exerciseId"
+        const val CREATE_FILE = 5050
+    }
+
     var exerciseId: Long? = null
     lateinit var viewModel: ShowExerciseDetailsViewModel
     private lateinit var map: GoogleMap
     private lateinit var mapHelper: MapHelper
     private var charts = arrayOfNulls<LineChart>(2)
     private var exerciseName: String = ""
-
-    companion object {
-        const val EXERCISE_ID_EXTRA = "exerciseId"
-        const val EXERCISE_ID_SAVE_INSTANCE = "exerciseId"
-        const val CREATE_FILE = 5050
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +48,12 @@ class ShowExerciseDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
         // set up exercise data fields
-        val dateTextView = findViewById<TextView>(R.id.exercise_date)
-        val nameTextView = findViewById<TextView>(R.id.exercise_name_EditText)
-        val distanceTextView = findViewById<TextView>(R.id.exercise_distance)
-        val durationTextView = findViewById<TextView>(R.id.exercise_duration)
-        val elevationTextView = findViewById<TextView>(R.id.exercise_elevationGain)
-        val speedTextView = findViewById<TextView>(R.id.exercise_speed)
+        val dateTextView = findViewById<TextView>(R.id.text_exercise_date)
+        val nameTextView = findViewById<TextView>(R.id.text_exercise_name)
+        val distanceTextView = findViewById<TextView>(R.id.text_exercise_distance)
+        val durationTextView = findViewById<TextView>(R.id.text_exercise_duration)
+        val elevationTextView = findViewById<TextView>(R.id.text_exercise_elevationGain)
+        val speedTextView = findViewById<TextView>(R.id.text_exercise_speed)
         val notesTextView = findViewById<TextView>(R.id.exercise_notes)
 
         viewModel.formattedExercise.observe(this, {
@@ -113,7 +113,7 @@ class ShowExerciseDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
      * add a custom menu with a delete button
      */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.exercise_details_menu, menu)
+        menuInflater.inflate(R.menu.exercise_details, menu)
         return true
     }
 
@@ -151,7 +151,7 @@ class ShowExerciseDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
                     viewModel.exportGPX(exerciseId!!, it)
                 }
             } else {
-                Log.d("g53mdp", "File export canceled by user")
+                Log.d("OpenAir", "File export canceled by user")
             }
         }
     }

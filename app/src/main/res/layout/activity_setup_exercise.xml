@@ -7,12 +7,12 @@
     tools:context=".ui.feature.recordExercise.SetupExerciseActivity">
 
     <Button
-        android:id="@+id/start_button"
+        android:id="@+id/button_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="false"
         android:onClick="onStartRecording"
-        android:text="@string/recordExercise_startButton"
+        android:text="@string/recordExercise_button_start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

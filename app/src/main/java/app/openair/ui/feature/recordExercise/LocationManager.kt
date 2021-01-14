@@ -41,7 +41,7 @@ class LocationManager(private val context: Context) {
     @SuppressLint("MissingPermission")
     fun startPoll() {
         fusedLocationClient.locationAvailability.addOnSuccessListener { availability ->
-            Log.d("g53mdp", "location availability: ${availability.isLocationAvailable}")
+            Log.d("OpenAir", "location availability: ${availability.isLocationAvailable}")
         }
 
         fusedLocationClient.requestLocationUpdates(
@@ -52,7 +52,7 @@ class LocationManager(private val context: Context) {
     }
 
     fun stopPoll() {
-        Log.d("g53mdp", "stopping location updates")
+        Log.d("OpenAir", "stopping location updates")
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
@@ -65,14 +65,14 @@ class LocationManager(private val context: Context) {
         val connectionResult = apiInstance.isGooglePlayServicesAvailable(context)
 
         if (connectionResult != ConnectionResult.SUCCESS) {
-            Log.d("g53mdp", "Google Play Services are unavailable on this device")
+            Log.d("OpenAir", "Google Play Services are unavailable on this device")
 
             if (apiInstance.isUserResolvableError(connectionResult)) {
                 apiInstance.getErrorDialog(activity, connectionResult, 1010).show()
             }
             return false
         }
-        Log.d("g53mdp", "Google Play Services are available on this device")
+        Log.d("OpenAir", "Google Play Services are available on this device")
         return true
     }
 
@@ -82,7 +82,7 @@ class LocationManager(private val context: Context) {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Log.d("g53mdp", "no location permissions, requesting from user")
+            Log.d("OpenAir", "no location permissions, requesting from user")
             requestPermissions(
                 activity,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -90,7 +90,7 @@ class LocationManager(private val context: Context) {
             )
             return false
         }
-        Log.d("g53mdp", "location permissions already granted")
+        Log.d("OpenAir", "location permissions already granted")
         return true
     }
 }

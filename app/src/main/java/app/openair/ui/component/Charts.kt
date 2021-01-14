@@ -22,10 +22,6 @@ class Charts {
             Color.rgb(240, 80, 240),
         )
 
-        private fun timeFormatter(value: Float): String {
-            return formatMillisecondsToString(value.toLong())
-        }
-
         fun setupElevationChart(
             chart: LineChart,
             data: List<Entry>,
@@ -92,9 +88,10 @@ class Charts {
             )
         }
 
-        // from https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartExample/src/main/java/com/xxmassdeveloper/mpchartexample/CubicLineChartActivity.java
-        // under Apache license version 2.0
-        // with modifications
+        private fun timeFormatter(value: Float): String {
+            return formatMillisecondsToString(value.toLong())
+        }
+
         private fun setupOrUpdateChart(
             chart: LineChart,
             data: List<Entry>,
@@ -152,7 +149,7 @@ class Charts {
                 chart.axisRight.isEnabled = false
                 chart.xAxis.isEnabled = true
 
-                // FIXME this doesn't work with dark theme
+                // FIXME this doesn't work with dark theme #6
                 // set the colour of the left axis labels
                 chart.axisLeft.textColor = Color.BLACK
 

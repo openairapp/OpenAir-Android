@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/exercise_date"
+            android:id="@+id/text_exercise_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -22,13 +22,13 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/exercise_name_EditText"
+            android:id="@+id/text_exercise_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textSize="25sp"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/exercise_date" />
+            card_view:layout_constraintTop_toBottomOf="@+id/text_exercise_date" />
 
         <LinearLayout
             android:id="@+id/exercise_distance_container"
@@ -37,16 +37,16 @@
             android:orientation="vertical"
             card_view:layout_constraintEnd_toStartOf="@+id/exercise_duration_container"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/exercise_name_EditText">
+            card_view:layout_constraintTop_toBottomOf="@+id/text_exercise_name">
 
             <TextView
-                android:id="@+id/exercise_distance_label"
+                android:id="@+id/text_exercise_distance_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/showExerciseList_recycler_label_distance" />
+                android:text="@string/showExerciseList_recyclerItem_label_distance" />
 
             <TextView
-                android:id="@+id/exercise_distance"
+                android:id="@+id/text_exercise_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp" />
@@ -59,16 +59,16 @@
             android:orientation="vertical"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/exercise_name_EditText">
+            card_view:layout_constraintTop_toBottomOf="@+id/text_exercise_name">
 
             <TextView
-                android:id="@+id/exercise_duration_label"
+                android:id="@+id/text_exercise_duration_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/showExerciseList_recycler_label_duration"/>
+                android:text="@string/showExerciseList_recyclerItem_label_duration"/>
 
             <TextView
-                android:id="@+id/exercise_duration"
+                android:id="@+id/text_exercise_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp" />
@@ -82,16 +82,16 @@
             android:orientation="vertical"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/exercise_duration_container"
-            card_view:layout_constraintTop_toBottomOf="@+id/exercise_name_EditText">
+            card_view:layout_constraintTop_toBottomOf="@+id/text_exercise_name">
 
             <TextView
-                android:id="@+id/exercise_elevationGain_label"
+                android:id="@+id/text_exercise_elevationGain_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/showExerciseList_recycler_label_elevation"/>
+                android:text="@string/showExerciseList_recyclerItem_label_elevation"/>
 
             <TextView
-                android:id="@+id/exercise_elevationGain"
+                android:id="@+id/text_exercise_elevationGain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp" />

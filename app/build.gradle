@@ -17,21 +17,19 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        manifestPlaceholders = [mapsApiKey: ""]
+
         Properties properties = new Properties()
         if (rootProject.file("local.properties").exists()) {
             properties.load(rootProject.file("local.properties").newDataInputStream())
+            manifestPlaceholders = [mapsApiKey: properties.getProperty("MAPS_API_KEY")]
         }
 
-        manifestPlaceholders = [mapsApiKey: ""]
         // Inject the Maps API key into the manifest from the environment
-        // android studio won't build unless you check the environment is available first
+        // this is primarily for the build pipeline
+        // it's recommended to use local.properties when developing
         if (System.hasProperty('MAPS_API_KEY')) {
             manifestPlaceholders = [mapsApiKey: System.getEnv("MAPS_API_KEY")]
-        }
-
-        // Inject the Maps API key into the manifest from properties, or override the environment if set
-        if (project.hasProperty('MAPS_API_KEY')) {
-            manifestPlaceholders = [mapsApiKey: properties.getProperty("MAPS_API_KEY")]
         }
 
         lintOptions {

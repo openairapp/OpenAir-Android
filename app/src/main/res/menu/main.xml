@@ -2,8 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_clear"
+        android:icon="@drawable/clear_white_24dp"
+        android:title="@string/showExerciseList_multiSelect_menu_actionClear"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_delete"
         android:icon="@drawable/delete_24dp"
-        android:title="@string/recordExercise_menuOption_discard"
+        android:title="@string/showExerciseList_multiSelect_menu_actionDelete"
         app:showAsAction="ifRoom" />
 </menu>

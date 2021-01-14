@@ -9,64 +9,64 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/recordExercise_currentDurationLabel"
-        app:layout_constraintBottom_toTopOf="@+id/current_time"
+        android:text="@string/recordExercise_progress_label_duration"
+        app:layout_constraintBottom_toTopOf="@+id/text_current_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/current_time"
+        android:id="@+id/text_current_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="42sp"
-        app:layout_constraintBottom_toTopOf="@+id/current_speed"
+        app:layout_constraintBottom_toTopOf="@+id/text_current_speed"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/recordExercise_currentSpeedLabel"
-        app:layout_constraintBottom_toTopOf="@+id/current_speed"
+        android:text="@string/recordExercise_progress_label_speed"
+        app:layout_constraintBottom_toTopOf="@+id/text_current_speed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/current_speed"
+        android:id="@+id/text_current_speed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/current_distance"
+        app:layout_constraintBottom_toTopOf="@+id/text_current_distance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/current_time" />
+        app:layout_constraintTop_toBottomOf="@+id/text_current_time" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/recordExercise_currentDistanceLabel"
-        app:layout_constraintBottom_toTopOf="@+id/current_distance"
+        android:text="@string/recordExercise_progress_label_distance"
+        app:layout_constraintBottom_toTopOf="@+id/text_current_distance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/current_distance"
+        android:id="@+id/text_current_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/stop_button"
+        app:layout_constraintBottom_toTopOf="@+id/button_stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/current_speed" />
+        app:layout_constraintTop_toBottomOf="@+id/text_current_speed" />
 
     <Button
-        android:id="@+id/stop_button"
+        android:id="@+id/button_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onStopRecording"
-        android:text="@string/recordExercise_stopButton"
+        android:text="@string/recordExercise_button_stop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/current_distance" />
+        app:layout_constraintTop_toBottomOf="@+id/text_current_distance" />
 </androidx.constraintlayout.widget.ConstraintLayout>
