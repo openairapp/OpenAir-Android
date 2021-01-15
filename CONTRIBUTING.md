@@ -8,7 +8,7 @@ If you've noticed a bug or have a feature request, [make one][new issue]! It's
 generally best if you get confirmation of your bug or approval for your feature
 request this way before starting to code.
 
-If you have a general question about OpenAir please message us, the issue tracker is only for bugs and feature requests.
+If you have a general question about OpenAir please [ask us], the issue tracker is only for bugs and feature requests.
 
 ### Fork & create a branch
 
@@ -88,6 +88,7 @@ met.
 
 
 [new issue]: https://github.com/openairapp/OpenAir-Android/issues/new
+[ask us]: https://github.com/openairapp/OpenAir-Android/discussions
 [fork OpenAir]: https://help.github.com/articles/fork-a-repo
 [make a pull request]: https://help.github.com/articles/creating-a-pull-request
 [git rebasing]: http://git-scm.com/book/en/Git-Branching-Rebasing
