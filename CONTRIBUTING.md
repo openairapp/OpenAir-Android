@@ -26,6 +26,12 @@ git checkout -b 325-add-japanese-translations
 At this point, you're ready to make your changes! Feel free to ask for help;
 everyone is a beginner at first :wink:
 
+We kindly ask that you follow the [styleguide] used by our project, with the exeption of the following:
+ - Section 2.2.1 - Fields definition and naming (however please do keep fields at the top of their scope)
+ - Anything which doesn't apply to Kotlin
+
+If you find anything that doesn't match this feel free to fix it or [raise an issue][new issue]
+
 ### View your changes in Android Studio
 
 This should go without saying, but make sure to test that your changes do work as intended.
@@ -89,6 +95,7 @@ met.
 
 [new issue]: https://github.com/openairapp/OpenAir-Android/issues/new
 [fork OpenAir]: https://help.github.com/articles/fork-a-repo
+[styleguide]: https://github.com/umesh0492/android-guidelines/blob/a23f4fb6b279b6a15baf83ba1dfdf56f2c33466b/project_and_code_guidelines.md
 [make a pull request]: https://help.github.com/articles/creating-a-pull-request
 [git rebasing]: http://git-scm.com/book/en/Git-Branching-Rebasing
 [interactive rebase]: https://help.github.com/en/github/using-git/about-git-rebase
