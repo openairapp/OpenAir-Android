@@ -10,14 +10,14 @@ import com.google.android.material.textfield.TextInputEditText
 
 class EditExerciseActivity : AppCompatActivity() {
 
+    companion object {
+        const val EXERCISE_ID_EXTRA = "exerciseId"
+    }
+
     var exerciseId: Long? = null
     lateinit var viewModel: EditExerciseViewModel
     lateinit var nameField: TextInputEditText
     lateinit var notesField: TextInputEditText
-
-    companion object {
-        const val EXERCISE_ID_EXTRA = "exerciseId"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +28,8 @@ class EditExerciseActivity : AppCompatActivity() {
         val bundle = intent.extras
         viewModel.exerciseId = bundle?.getLong(EXERCISE_ID_EXTRA)
 
-        nameField = findViewById(R.id.exercise_name_EditText)
-        notesField = findViewById(R.id.exercise_notes_EditText)
+        nameField = findViewById(R.id.text_exercise_name)
+        notesField = findViewById(R.id.text_exercise_notes)
 
         // we don't want this to overwrite user changes if the repository were to update
         viewModel.exercise.observeOnce {

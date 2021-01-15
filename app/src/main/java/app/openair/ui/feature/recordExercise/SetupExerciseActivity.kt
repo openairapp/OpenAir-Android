@@ -34,7 +34,7 @@ class SetupExerciseActivity : AppCompatActivity(),
         viewModel = ViewModelProvider(this).get(SetupExerciseViewModel::class.java)
 
         setContentView(R.layout.activity_setup_exercise)
-        startButton = findViewById(R.id.start_button)
+        startButton = findViewById(R.id.button_start)
 
         // see if we have play services and location permissions, and request them if we don't
         locationManager = LocationManager(this)
@@ -72,7 +72,7 @@ class SetupExerciseActivity : AppCompatActivity(),
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        Log.d("g53mdp", "permission response received")
+        Log.d("OpenAir", "permission response received")
         // if the permission request gets a response, update the button to match
         // if it is granted this should enable the button and allow the user to continue to tracking their position
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -87,7 +87,7 @@ class SetupExerciseActivity : AppCompatActivity(),
                 locationAvailable = permissionResult
 
                 Log.d(
-                    "g53mdp",
+                    "OpenAir",
                     if (permissionResult) "location permission granted by user :)" else "location permissions denied by user >:("
                 )
             }

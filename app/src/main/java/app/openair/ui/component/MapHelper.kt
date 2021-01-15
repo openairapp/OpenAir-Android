@@ -11,14 +11,14 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
 
-class MapHelper(val context: Context, val map: GoogleMap, val screenWidth: Int) {
+class MapHelper(val context: Context, val map: GoogleMap, private val screenWidth: Int) {
 
     init {
         map.mapType = GoogleMap.MAP_TYPE_TERRAIN
     }
 
     fun updateMapRoute(points: Array<LatLng>) {
-            Log.d("g53mdp", "map initialised, plotting route")
+            Log.d("OpenAir", "map initialised, plotting route")
             // clear any previous path since this method may be called multiple times
             map.clear()
 
@@ -30,7 +30,7 @@ class MapHelper(val context: Context, val map: GoogleMap, val screenWidth: Int) 
             // main map line
             map.addPolyline(
                 PolylineOptions()
-                    .add(*points)
+                    .add(*points) // * is Kotlin's spread operator, no pointers here
                     .color(ContextCompat.getColor(context, R.color.primaryColor))
                     .startCap(RoundCap())
                     .endCap(RoundCap())
@@ -45,7 +45,7 @@ class MapHelper(val context: Context, val map: GoogleMap, val screenWidth: Int) 
                         points[0].longitude
                     )
                     )
-                    .title(context.getString(R.string.showSingleExercise_mapMarker_start))
+                    .title(context.getString(R.string.showSingleExercise_map_marker_start))
                     .icon(getBitmapDescriptorFromVector(R.drawable.play_circle_green_24dp))
 
             )
@@ -59,7 +59,7 @@ class MapHelper(val context: Context, val map: GoogleMap, val screenWidth: Int) 
                         points[points.size -1].longitude
                     )
                     )
-                    .title(context.getString(R.string.showSingleExercise_mapMarker_end))
+                    .title(context.getString(R.string.showSingleExercise_map_marker_end))
                     .icon(getBitmapDescriptorFromVector(R.drawable.stop_circle_red_24dp))
             )
 

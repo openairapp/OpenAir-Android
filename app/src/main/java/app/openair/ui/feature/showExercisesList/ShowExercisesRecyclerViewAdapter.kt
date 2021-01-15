@@ -28,6 +28,7 @@ class ShowExercisesRecyclerViewAdapter(val context: Context) :
     private var tracker: SelectionTracker<Long>? = null
 
     init {
+        // we can set this since getItemId() bases the id on the actual element data
         setHasStableIds(true)
     }
 
@@ -36,7 +37,7 @@ class ShowExercisesRecyclerViewAdapter(val context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = inflater.inflate(R.layout.recyclerview_exercise, parent, false)
+        val view = inflater.inflate(R.layout.item_exercise, parent, false)
         return ViewHolder(view)
     }
 
@@ -64,11 +65,11 @@ class ShowExercisesRecyclerViewAdapter(val context: Context) :
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private var exerciseId: Long? = null
         val cardView: CardView = itemView.findViewById(R.id.card_view)
-        private val dateTextView: TextView = itemView.findViewById(R.id.exercise_date)
-        private val nameTextView: TextView = itemView.findViewById(R.id.exercise_name_EditText)
-        private val distanceTextView: TextView = itemView.findViewById(R.id.exercise_distance)
-        private val durationTextView: TextView = itemView.findViewById(R.id.exercise_duration)
-        private val elevationTextView: TextView = itemView.findViewById(R.id.exercise_elevationGain)
+        private val dateTextView: TextView = itemView.findViewById(R.id.text_exercise_date)
+        private val nameTextView: TextView = itemView.findViewById(R.id.text_exercise_name)
+        private val distanceTextView: TextView = itemView.findViewById(R.id.text_exercise_distance)
+        private val durationTextView: TextView = itemView.findViewById(R.id.text_exercise_duration)
+        private val elevationTextView: TextView = itemView.findViewById(R.id.text_exercise_elevationGain)
 
         fun bind(item: FormattedExercise) {
             exerciseId = item.id

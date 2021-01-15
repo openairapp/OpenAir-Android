@@ -144,12 +144,12 @@ class RecordService : Service() {
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .addAction(
                 R.drawable.stop_black_24dp,
-                getStringResourceByName("recordExercise_notificationAction_finish"),
+                getStringResourceByName("action_finish"),
                 finishIntent
             )
             .addAction(
                 R.drawable.delete_24dp,
-                getStringResourceByName("recordExercise_notificationAction_delete"),
+                getStringResourceByName("action_delete"),
                 deleteIntent
             )
             .build()
@@ -198,7 +198,7 @@ class RecordService : Service() {
 
     private fun locationCallback(locationResult: LocationResult?) {
         locationResult ?: return
-        Log.v("g53mdp", "location update: ${locationResult.lastLocation}")
+        Log.v("OpenAir", "location update: ${locationResult.lastLocation}")
 
         // discard any bad readings
         val filteredLocations = locationResult.locations

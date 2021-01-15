@@ -18,7 +18,7 @@ class ExerciseWorker(val context: Context, workerParams: WorkerParameters) :
         const val EXERCISE_ID_KEY = "exerciseId"
 
         fun schedule(context: Context, exerciseId: Long, tag: String) {
-            Log.d("g53mdp", "scheduling processing for exercise data")
+            Log.d("OpenAir", "scheduling processing for exercise data")
             val workRequest = OneTimeWorkRequest.Builder(ExerciseWorker::class.java)
 
             // pass in the exercise ID
@@ -39,13 +39,13 @@ class ExerciseWorker(val context: Context, workerParams: WorkerParameters) :
         val exerciseData = repository.getExerciseWithLocationsStatic(exerciseId)
 
         Log.d(
-            "g53mdp",
+            "OpenAir",
             "processing exercise: id=$exerciseId, name=${exerciseData.exercise.name}, locations=${exerciseData.locations.size}"
         )
 
         val duration = calculateDuration(exerciseData.exercise)
         if(duration == 0L){
-            Log.d("g53mdp", "unable to process exercise with duration of 0")
+            Log.d("OpenAir", "unable to process exercise with duration of 0")
             return Result.failure()
         }
 
@@ -62,7 +62,7 @@ class ExerciseWorker(val context: Context, workerParams: WorkerParameters) :
                 elevationGain
             )
         }
-        Log.d("g53mdp", "calculations complete")
+        Log.d("OpenAir", "calculations complete")
 
         return Result.success()
     }
@@ -73,14 +73,15 @@ class ExerciseWorker(val context: Context, workerParams: WorkerParameters) :
     private fun calculateDuration(exercise: Exercise): Long =
         (exercise.endTime.time - exercise.startTime.time)
 
-
     /**
      * calculate the average speed over the exercise in meters per second
      */
     private fun calculateAverageSpeed(distance: Float, duration: Long) =
         distance / ((duration).toFloat() / 1000)
 
-
+    /**
+     * calculate the total distance traveled for the exercise in meters
+     */
     private fun calculateTotalDistance(locations: List<Location>): Float =
         calculateDistanceDifferentials(locations)
             .sum()

@@ -12,11 +12,11 @@ OpenAir is a privacy focused fitness tracker. Your data is yours, and we think i
 5. Build and install the apk `./gradlew installDebug`
 
 
-
 ## Contributing
 [See our contributing guidlines](CONTRIBUTING.md)
 
 In addition to the guidelines above, you may want to generate and add a maps API key as specified in the installation instructions, depending on whether your changes depend on maps.
+
 
 ## License
 [GPLv3](LICENSE)

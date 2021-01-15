@@ -10,13 +10,13 @@
         android:id="@+id/exercise_name_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/recordExercise_exerciseNameFieldLabel"
+        android:hint="@string/recordExercise_save_label_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/exercise_name_EditText"
+            android:id="@+id/text_exercise_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -28,13 +28,13 @@
         android:id="@+id/exercise_notes_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/recordExercise_exerciseNotesFieldLabel"
+        android:hint="@string/recordExercise_save_label_notes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exercise_name_container">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/exercise_notes_EditText"
+            android:id="@+id/text_exercise_notes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -43,12 +43,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/save_exercise_button"
+        android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:onClick="onSave"
-        android:text="@string/recordExercise_saveButton"
+        android:text="@string/action_save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exercise_notes_container" />
