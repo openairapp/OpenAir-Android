@@ -37,20 +37,20 @@ checks as the rest of the project.
 
 ### Make a Pull Request
 
-At this point, you should switch back to your master branch and make sure it's
-up to date with OpenAir's master branch:
+At this point, you should switch back to your develop branch and make sure it's
+up to date with OpenAir's develop branch:
 
 ```sh
 git remote add upstream git@github.com:openairapp/OpenAir-Android.git
-git checkout master
-git pull upstream master
+git checkout develop
+git pull upstream develop
 ```
 
-Then update your feature branch from your local copy of master, and push it!
+Then update your feature branch from your local copy of develop, and push it!
 
 ```sh
 git checkout 325-add-japanese-translations
-git rebase master
+git rebase develop
 git push --set-upstream origin 325-add-japanese-translations
 ```
 
@@ -68,19 +68,19 @@ To learn more about rebasing in Git, there are a lot of [good][git rebasing]
 
 ```sh
 git checkout 325-add-japanese-translations
-git pull --rebase upstream master
+git pull --rebase upstream develop
 git push --force-with-lease 325-add-japanese-translations
 ```
 
 ### Merging a PR (maintainers only)
 
-A PR can only be merged into master by a maintainer if:
+A PR can only be merged into develop by a maintainer if:
 
 * It is passing CI.
 * It has been approved by at least two maintainers. If it was a maintainer who
   opened the PR, only one extra approval is needed.
 * It has no requested changes.
-* It is up to date with current master.
+* It is up to date with current develop.
 
 Any maintainer is allowed to merge a PR if all of these conditions are
 met.
