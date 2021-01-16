@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {
             // change our FAB based on if there's an exercise in progress or not
             val intent = if (RecordService.running) {
                 Intent(this, TrackExerciseActivity::class.java)
