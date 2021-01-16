@@ -5,10 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [Exercise::class, Location::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -18,6 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
+        private const val TABLE_NAME = "fitness_database"
 
         fun getDatabase(context: Context): AppDatabase? {
             if (INSTANCE == null) {
@@ -25,9 +28,10 @@ abstract class AppDatabase : RoomDatabase() {
                     if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(
                             context.applicationContext,
-                            AppDatabase::class.java, "fitness_database"
+                            AppDatabase::class.java,
+                            TABLE_NAME
                         )
-                            //.addMigrations(MIGRATION_1_2)
+                            .addMigrations(MIGRATION_1_2)
                             .build()
                     }
                 }
@@ -35,11 +39,10 @@ abstract class AppDatabase : RoomDatabase() {
             return INSTANCE
         }
 
-        /*val MIGRATION_1_2 = object : Migration(1, 2) {
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("CREATE TABLE `Fruit` (`id` INTEGER, `name` TEXT, " +
-                        "PRIMARY KEY(`id`))")
+                database.execSQL("CREATE INDEX IF NOT EXISTS `index_location_exerciseId` ON `location` (`exerciseId`)")
             }
-        }*/
+        }
     }
 }
