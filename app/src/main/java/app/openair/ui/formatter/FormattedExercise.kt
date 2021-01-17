@@ -9,8 +9,7 @@ import app.openair.ui.formatter.FormatUtil.Companion.formatMpsToKphString
 class FormattedExercise(exercise: Exercise) {
     val id: Long = exercise.id
     val name: String = exercise.name.toString()
-    // TODO make this date format nicer #3
-    val date: String = exercise.startTime.toString()
+    val date: String = java.text.SimpleDateFormat("d MMMM yyyy, HH:mm").format(exercise.startTime)
     val distance: String = formatMetersToKilometersString(exercise.distance)
     val duration: String = formatMillisecondsToString(exercise.duration)
     val elevation: String = formatAltitudeString(exercise.elevationGain)
