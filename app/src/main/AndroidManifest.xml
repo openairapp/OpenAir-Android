@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".OpenAirApp"
         android:theme="@style/Theme.FitnessTracker">
         <activity android:name="app.openair.ui.feature.showSingleExercise.EditExerciseActivity" />
         <activity android:name="app.openair.ui.feature.showSingleExercise.ShowExerciseDetailsActivity" />

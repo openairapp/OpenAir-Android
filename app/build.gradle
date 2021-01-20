@@ -92,6 +92,9 @@ dependencies {
     implementation 'io.jenetics:jpx:2.0.0'
     implementation 'stax:stax:1.2.0'
 
+    // Timber logging library
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
     implementation 'androidx.recyclerview:recyclerview-selection:1.0.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

@@ -2,7 +2,6 @@ package app.openair.model.logic
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.work.*
 import app.openair.model.AppRepository
 import io.jenetics.jpx.GPX
@@ -12,17 +11,18 @@ import io.jenetics.jpx.WayPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 class GPXWorker(val context: Context, workerParams: WorkerParameters) :
-        Worker(context, workerParams) {
+    Worker(context, workerParams) {
 
     companion object {
         const val EXERCISE_ID_KEY = "exerciseId"
         const val SAVE_DIRECTORY_URI = "saveUri"
 
         fun schedule(context: Context, exerciseId: Long, fileUri: Uri) {
-            Log.d("OpenAir", "scheduling export for exercise data")
+            Timber.d("scheduling export for exercise data")
             val workRequest = OneTimeWorkRequest.Builder(GPXWorker::class.java)
 
             // pass in the exercise ID
@@ -41,35 +41,32 @@ class GPXWorker(val context: Context, workerParams: WorkerParameters) :
         val fileUri = Uri.parse(inputData.getString(SAVE_DIRECTORY_URI))
         val exerciseData = repository.getExerciseWithLocationsStatic(exerciseId)
 
-        Log.d(
-                "OpenAir",
-                "exporting exercise: id=$exerciseId, name=${exerciseData.exercise.name}, locations=${exerciseData.locations.size}"
-        )
+        Timber.d("exporting exercise: id=$exerciseId, name=${exerciseData.exercise.name}, locations=${exerciseData.locations.size}")
 
         if (exerciseData.locations.isEmpty()) {
-            Log.d("OpenAir", "unable to export exercise with 0 location markers")
+            Timber.w("unable to export exercise with 0 location markers")
             return Result.failure()
         }
 
         // put all the location data for the provided exercise into a gpx file
         val gpx = GPX.builder()
-                .addTrack { track: Track.Builder ->
-                    track.addSegment { segment: TrackSegment.Builder ->
+            .addTrack { track: Track.Builder ->
+                track.addSegment { segment: TrackSegment.Builder ->
 
-                        exerciseData.locations.forEach { location ->
-                            segment.addPoint { p: WayPoint.Builder ->
+                    exerciseData.locations.forEach { location ->
+                        segment.addPoint { p: WayPoint.Builder ->
 
-                                p.apply {
-                                    lat(location.latitude)
-                                    lon(location.longitude)
-                                    ele(location.elevation)
-                                    time(location.time)
-                                }
+                            p.apply {
+                                lat(location.latitude)
+                                lon(location.longitude)
+                                ele(location.elevation)
+                                time(location.time)
                             }
                         }
                     }
                 }
-                .build()
+            }
+            .build()
 
         CoroutineScope(Dispatchers.IO).launch {
             @Suppress("BlockingMethodInNonBlockingContext") // we are using the IO coroutine context so it is ok to block
@@ -81,7 +78,6 @@ class GPXWorker(val context: Context, workerParams: WorkerParameters) :
             @Suppress("BlockingMethodInNonBlockingContext")
             outputStream?.close()
         }
-        Log.d("OpenAir", "export complete")
 
         return Result.success()
 

@@ -3,7 +3,6 @@ package app.openair.ui.component
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import app.openair.R
@@ -18,7 +17,6 @@ class MapHelper(val context: Context, val map: GoogleMap, private val screenWidt
     }
 
     fun updateMapRoute(points: Array<LatLng>) {
-            Log.d("OpenAir", "map initialised, plotting route")
             // clear any previous path since this method may be called multiple times
             map.clear()
 
