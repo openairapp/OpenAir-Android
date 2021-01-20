@@ -7,7 +7,6 @@ import android.content.ServiceConnection
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.IBinder
-import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -75,13 +74,9 @@ class ShowExercisesFragment : Fragment() {
             recordService?.registerCallback(SERVICE_CALLBACK_IDENTIFIER, callback)
 
             if (recordService?.getIsInProgress() == true) {
-
-                Log.d("OpenAir", "progress banner visible")
                 // an exercise is awaiting processing
                 exerciseInProgressBanner.visibility = View.VISIBLE
             } else {
-
-                Log.d("OpenAir", "progress banner gone")
                 exerciseInProgressBanner.visibility = View.GONE
             }
         }

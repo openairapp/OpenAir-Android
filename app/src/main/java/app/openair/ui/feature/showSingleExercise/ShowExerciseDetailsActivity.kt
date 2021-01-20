@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -18,6 +17,7 @@ import com.github.mikephil.charting.charts.LineChart
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import timber.log.Timber
 
 
 class ShowExerciseDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -151,7 +151,7 @@ class ShowExerciseDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
                     viewModel.exportGPX(exerciseId!!, it)
                 }
             } else {
-                Log.d("OpenAir", "File export canceled by user")
+                Timber.d("File export canceled by user")
             }
         }
     }

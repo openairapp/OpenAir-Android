@@ -1,7 +1,6 @@
 package app.openair.model.logic
 
 import android.content.Context
-import android.util.Log
 import androidx.work.*
 import app.openair.model.AppRepository
 import app.openair.model.database.Exercise
@@ -9,6 +8,7 @@ import app.openair.model.database.Location
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import android.location.Location as AndroidLocation
 
 class ExerciseWorker(val context: Context, workerParams: WorkerParameters) :
@@ -18,7 +18,7 @@ class ExerciseWorker(val context: Context, workerParams: WorkerParameters) :
         const val EXERCISE_ID_KEY = "exerciseId"
 
         fun schedule(context: Context, exerciseId: Long, tag: String) {
-            Log.d("OpenAir", "scheduling processing for exercise data")
+            Timber.d("scheduling processing for exercise data")
             val workRequest = OneTimeWorkRequest.Builder(ExerciseWorker::class.java)
 
             // pass in the exercise ID
@@ -38,14 +38,11 @@ class ExerciseWorker(val context: Context, workerParams: WorkerParameters) :
         val exerciseId = inputData.getLong(EXERCISE_ID_KEY, 0)
         val exerciseData = repository.getExerciseWithLocationsStatic(exerciseId)
 
-        Log.d(
-            "OpenAir",
-            "processing exercise: id=$exerciseId, name=${exerciseData.exercise.name}, locations=${exerciseData.locations.size}"
-        )
+        Timber.d("processing exercise: id=$exerciseId, name=${exerciseData.exercise.name}, locations=${exerciseData.locations.size}")
 
         val duration = calculateDuration(exerciseData.exercise)
-        if(duration == 0L){
-            Log.d("OpenAir", "unable to process exercise with duration of 0")
+        if (duration == 0L) {
+            Timber.w("unable to process exercise with duration of 0")
             return Result.failure()
         }
 
@@ -62,7 +59,6 @@ class ExerciseWorker(val context: Context, workerParams: WorkerParameters) :
                 elevationGain
             )
         }
-        Log.d("OpenAir", "calculations complete")
 
         return Result.success()
     }
