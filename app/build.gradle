@@ -75,7 +75,7 @@ android {
                 keyPassword System.getEnv("BUILD_KEY_PASSWORD")
                 storePassword System.getEnv("BUILD_KEYSTORE_PASSWORD")
             } else {
-                logger.debug("key variables were not found")
+                logger.warn("key variables were not found")
             }
         }
     }
