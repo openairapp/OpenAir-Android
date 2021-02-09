@@ -12,6 +12,7 @@ import app.openair.ui.formatter.FormattedExercise
 import kotlinx.coroutines.launch
 
 class ShowExercisesViewModel(application: Application) : AndroidViewModel(application) {
+
     private var repository: AppRepository = AppRepository(application)
     var exercises: LiveData<List<FormattedExercise>>
     var processingExercise: LiveData<Boolean>

@@ -6,17 +6,17 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Looper
-import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.requestPermissions
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.location.*
+import timber.log.Timber
 
 class LocationManager(private val context: Context) {
 
     companion object {
-        val REQUEST_LOCATION_PERMISSION = 100
+        const val REQUEST_LOCATION_PERMISSION = 100
     }
 
     lateinit var callback: (result: LocationResult) -> Unit
@@ -41,7 +41,7 @@ class LocationManager(private val context: Context) {
     @SuppressLint("MissingPermission")
     fun startPoll() {
         fusedLocationClient.locationAvailability.addOnSuccessListener { availability ->
-            Log.d("g53mdp", "location availability: ${availability.isLocationAvailable}")
+            Timber.d("location availability: ${availability.isLocationAvailable}")
         }
 
         fusedLocationClient.requestLocationUpdates(
@@ -52,7 +52,7 @@ class LocationManager(private val context: Context) {
     }
 
     fun stopPoll() {
-        Log.d("g53mdp", "stopping location updates")
+        Timber.d("stopping location updates")
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
@@ -65,14 +65,14 @@ class LocationManager(private val context: Context) {
         val connectionResult = apiInstance.isGooglePlayServicesAvailable(context)
 
         if (connectionResult != ConnectionResult.SUCCESS) {
-            Log.d("g53mdp", "Google Play Services are unavailable on this device")
+            Timber.d("Google Play Services are unavailable on this device")
 
             if (apiInstance.isUserResolvableError(connectionResult)) {
                 apiInstance.getErrorDialog(activity, connectionResult, 1010).show()
             }
             return false
         }
-        Log.d("g53mdp", "Google Play Services are available on this device")
+        Timber.d("Google Play Services are available on this device")
         return true
     }
 
@@ -82,7 +82,7 @@ class LocationManager(private val context: Context) {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Log.d("g53mdp", "no location permissions, requesting from user")
+            Timber.d("no location permissions, requesting from user")
             requestPermissions(
                 activity,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -90,7 +90,7 @@ class LocationManager(private val context: Context) {
             )
             return false
         }
-        Log.d("g53mdp", "location permissions already granted")
+        Timber.d("location permissions already granted")
         return true
     }
 }

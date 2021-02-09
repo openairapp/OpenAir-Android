@@ -110,9 +110,9 @@ class TrackExerciseActivity : AppCompatActivity() {
 
             viewModel = ViewModelProvider(this).get(TrackExerciseViewModel::class.java)
 
-            timeField = findViewById(R.id.current_time)
-            speedField = findViewById(R.id.current_speed)
-            distanceField = findViewById(R.id.current_distance)
+            timeField = findViewById(R.id.text_current_time)
+            speedField = findViewById(R.id.text_current_speed)
+            distanceField = findViewById(R.id.text_current_distance)
         }
     }
 

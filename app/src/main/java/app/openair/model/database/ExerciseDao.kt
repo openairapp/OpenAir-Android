@@ -2,6 +2,7 @@ package app.openair.model.database
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 
@@ -14,6 +15,7 @@ interface ExerciseDao : BaseDao<Exercise> {
     @Query("SELECT * FROM `exercise` WHERE exercise.id = :id")
     fun get(id: Long): Flow<Exercise>
 
+    @Transaction
     @Query("SELECT * FROM `exercise` WHERE exercise.id = :id")
     fun getWithLocations(id: Long): Flow<ExerciseWithLocations>
 
@@ -21,8 +23,9 @@ interface ExerciseDao : BaseDao<Exercise> {
     fun getBetween(fromDate: Date, toDate: Date): Flow<List<Exercise>>
 
     /**
-     * the same a get(), but without live data
+     * the same a getWithLocations(), but without live data
      */
+    @Transaction
     @Query("SELECT * FROM `exercise` WHERE exercise.id = :id")
     fun getStatic(id: Long): ExerciseWithLocations
 

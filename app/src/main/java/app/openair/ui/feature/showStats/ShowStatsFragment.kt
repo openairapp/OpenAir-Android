@@ -26,10 +26,10 @@ class ShowStatsFragment : Fragment() {
     private var charts = arrayOfNulls<LineChart>(4)
 
     private val periodButtonMapping: Map<Int, StatsPeriod> = mapOf(
-        R.id.periodSelector_RadioButton_day to StatsPeriod.DAY,
-        R.id.periodSelector_RadioButton_week to StatsPeriod.WEEK,
-        R.id.periodSelector_RadioButton_month to StatsPeriod.MONTH,
-        R.id.periodSelector_RadioButton_year to StatsPeriod.YEAR
+        R.id.radio_periodSelector_day to StatsPeriod.DAY,
+        R.id.radio_periodSelector_week to StatsPeriod.WEEK,
+        R.id.radio_periodSelector_month to StatsPeriod.MONTH,
+        R.id.radio_periodSelector_year to StatsPeriod.YEAR
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +42,7 @@ class ShowStatsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.show_stats_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_show_stats, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,10 +67,10 @@ class ShowStatsFragment : Fragment() {
                 ?.isChecked = true
         }
 
-        val totalDistanceTextView = view.findViewById<TextView>(R.id.total_distance_value)
-        val totalDurationTextView = view.findViewById<TextView>(R.id.total_duration_value)
-        val totalElevationGainTextView = view.findViewById<TextView>(R.id.total_elevationGain_value)
-        val averageSpeedTextView = view.findViewById<TextView>(R.id.average_speed_value)
+        val totalDistanceTextView = view.findViewById<TextView>(R.id.text_total_distance)
+        val totalDurationTextView = view.findViewById<TextView>(R.id.text_total_duration)
+        val totalElevationGainTextView = view.findViewById<TextView>(R.id.total_elevationGain)
+        val averageSpeedTextView = view.findViewById<TextView>(R.id.text_average_speed)
 
         charts[0] = view.findViewById(R.id.chart_distance)
         charts[1] = view.findViewById(R.id.chart_duration)

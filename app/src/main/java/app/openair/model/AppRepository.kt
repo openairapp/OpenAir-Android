@@ -18,14 +18,13 @@ import java.util.*
 
 class AppRepository(val context: Context) {
 
-    private var database: AppDatabase = AppDatabase.getDatabase(context)!!
-
-    private var exerciseDao: ExerciseDao
-    private var locationDao: LocationDao
-
     companion object {
         const val PROCESS_EXERCISE_WORK_TAG = "processExercise"
     }
+
+    private var database: AppDatabase = AppDatabase.getDatabase(context)!!
+    private var exerciseDao: ExerciseDao
+    private var locationDao: LocationDao
 
     init {
         exerciseDao = database.exerciseDao()

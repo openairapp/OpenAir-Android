@@ -4,11 +4,11 @@
     <item
         android:id="@+id/action_edit"
         android:icon="@drawable/edit_white_24dp"
-        android:title="@string/showSingleExercise_menuOption_edit"
+        android:title="@string/showSingleExercise_menu_actionEdit"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_export"
         android:icon="@drawable/save_alt_white_24dp"
-        android:title="@string/showSingleExercise_menuOption_export"
+        android:title="@string/showSingleExercise_menu_actionExport"
         app:showAsAction="ifRoom" />
 </menu>

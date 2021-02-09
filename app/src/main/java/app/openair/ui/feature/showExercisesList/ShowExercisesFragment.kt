@@ -7,7 +7,6 @@ import android.content.ServiceConnection
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.IBinder
-import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -31,11 +30,12 @@ class ShowExercisesFragment : Fragment() {
 
     companion object {
         fun newInstance() = ShowExercisesFragment()
+
         const val SERVICE_CALLBACK_IDENTIFIER = "ShowExercisesFragment"
     }
 
     private var recordService: RecordService.MyBinder? = null
-    private lateinit var exerciseViewModel: ShowExercisesViewModel
+    private lateinit var viewModel: ShowExercisesViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerViewAdapter: ShowExercisesRecyclerViewAdapter
     private lateinit var selectionTracker: SelectionTracker<Long>
@@ -54,7 +54,7 @@ class ShowExercisesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        exerciseViewModel = ViewModelProvider(this).get(ShowExercisesViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ShowExercisesViewModel::class.java)
         recyclerViewAdapter = ShowExercisesRecyclerViewAdapter(myContext)
     }
 
@@ -67,19 +67,16 @@ class ShowExercisesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_exercises, container, false)
     }
 
+    // TODO this probably shouldn't be connecting directly to the service #2
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
             recordService = service as RecordService.MyBinder
             recordService?.registerCallback(SERVICE_CALLBACK_IDENTIFIER, callback)
 
             if (recordService?.getIsInProgress() == true) {
-
-                Log.d("g53mdp", "progress banner visible")
                 // an exercise is awaiting processing
                 exerciseInProgressBanner.visibility = View.VISIBLE
             } else {
-
-                Log.d("g53mdp", "progress banner gone")
                 exerciseInProgressBanner.visibility = View.GONE
             }
         }
@@ -96,13 +93,13 @@ class ShowExercisesFragment : Fragment() {
             distance: Float
         ) {
             activity?.runOnUiThread {
-                exerciseInProgressDistance.text = exerciseViewModel.formatDistance(distance)
+                exerciseInProgressDistance.text = viewModel.formatDistance(distance)
             }
         }
 
         override fun updateCurrentTime(time: Long) {
             activity?.runOnUiThread {
-                exerciseInProgressTime.text = exerciseViewModel.formatTime(time)
+                exerciseInProgressTime.text = viewModel.formatTime(time)
             }
         }
 
@@ -118,8 +115,8 @@ class ShowExercisesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         processingBanner = view.findViewById(R.id.processing_banner)
         exerciseInProgressBanner = view.findViewById(R.id.exercise_inProgressBanner)
-        exerciseInProgressDistance = view.findViewById(R.id.exercise_distance)
-        exerciseInProgressTime = view.findViewById(R.id.exercise_time)
+        exerciseInProgressDistance = view.findViewById(R.id.text_exercise_distance)
+        exerciseInProgressTime = view.findViewById(R.id.text_exercise_time)
 
         // connect to the recording service to see if any activities are in progress
         // this depends on exerciseInProgressBanner being initialised to prevent errors
@@ -137,11 +134,11 @@ class ShowExercisesFragment : Fragment() {
         trackSelectedItems()
 
         // get elements to display when no exercises are present
-        val noContentTitle: TextView = view.findViewById(R.id.no_content_title)
-        val noContentMessage: TextView = view.findViewById(R.id.no_content_message)
+        val noContentTitle: TextView = view.findViewById(R.id.text_no_content_title)
+        val noContentMessage: TextView = view.findViewById(R.id.text_no_content_message)
 
         // observe the LiveData and pass it to the adapter when it updates
-        exerciseViewModel.exercises.observe(viewLifecycleOwner) {
+        viewModel.exercises.observe(viewLifecycleOwner) {
             recyclerViewAdapter.data = it
 
             // show a message when there are no recorded exercises
@@ -157,7 +154,7 @@ class ShowExercisesFragment : Fragment() {
         // observe the status of the WorkManager queue for the Exercise processing jobs
         // this is used to show a banner when an activity is still being processed so may be missing details
         // it turns out the exercises are processed almost immediately, but I figured I'd leave this here anyway
-        exerciseViewModel.processingExercise.observe(viewLifecycleOwner) {
+        viewModel.processingExercise.observe(viewLifecycleOwner) {
             if (it) {
                 // an exercise is awaiting processing
                 processingBanner.visibility = View.VISIBLE
@@ -178,7 +175,7 @@ class ShowExercisesFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
+        inflater.inflate(R.menu.main, menu)
 
         // hide the menu item that are only for when exercises are selected
         menu.findItem(R.id.action_clear)?.isVisible = false
@@ -212,25 +209,25 @@ class ShowExercisesFragment : Fragment() {
             val builder = AlertDialog.Builder(requireContext())
             builder.setMessage(
                 getString(
-                    R.string.showExerciseList_items_deleteDialog_message,
+                    R.string.showExerciseList_multiSelect_deleteDialog_message,
                     selectionTracker.selection.size()
                 )
             )
                 .setPositiveButton(
-                    R.string.showExerciseList_items_deleteDialog_confirm
+                    R.string.action_delete
                 ) { _, _ ->
                     // once the user confirms then get the ids of the exercises to delete and delete them
                     val exerciseIdsToDelete: MutableList<Long> = mutableListOf()
                     selectionTracker.selection.forEach {
                         exerciseIdsToDelete.add(it)
                     }
-                    exerciseViewModel.deleteExercises(exerciseIdsToDelete)
+                    viewModel.deleteExercises(exerciseIdsToDelete)
                     // then clear the selection tracker
                     selectionTracker.clearSelection()
                     // and tell recyclerview to update
                     recyclerViewAdapter.notifyDataSetChanged()
                 }
-                .setNegativeButton(R.string.showExerciseList_items_deleteDialog_cancel, null)
+                .setNegativeButton(R.string.action_cancel, null)
             // Show the dialog
             builder.create().show()
             true
@@ -267,7 +264,7 @@ class ShowExercisesFragment : Fragment() {
             )
         } else {
             actionbar.title =
-                getString(R.string.showExerciseList_items_selected, currentSelection.size())
+                getString(R.string.showExerciseList_multiSelect_selectedCount, currentSelection.size())
             actionbar.setBackgroundDrawable(
                 activity?.getColor(R.color.primaryDarkColor)?.let { ColorDrawable(it) }
             )

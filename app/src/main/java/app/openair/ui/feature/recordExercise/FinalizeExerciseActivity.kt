@@ -12,8 +12,12 @@ import app.openair.ui.feature.main.MainActivity
 import com.google.android.material.textfield.TextInputEditText
 import java.util.*
 
-
 class FinalizeExerciseActivity : AppCompatActivity() {
+
+    companion object {
+        const val EXERCISE_ID_EXTRA = "exerciseId"
+        const val EXERCISE_ACTION_DELETE = "deleteExercise"
+    }
 
     private lateinit var viewModel: FinalizeExerciseViewModel
     private lateinit var nameEditText: TextInputEditText
@@ -21,11 +25,6 @@ class FinalizeExerciseActivity : AppCompatActivity() {
 
     private var exerciseId: Long? = null
     private lateinit var stopTime: Date
-
-    companion object {
-        const val EXERCISE_ID_EXTRA = "exerciseId"
-        const val EXERCISE_ACTION_DELETE = "deleteExercise"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +37,14 @@ class FinalizeExerciseActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(FinalizeExerciseViewModel::class.java)
 
+        // TODO clear this up #5
         if(deleteExercise){
             deleteExercise()
         }else {
             setContentView(R.layout.activity_finalize_exercise)
 
-            nameEditText = findViewById(R.id.exercise_name_EditText)
-            notesEditText = findViewById(R.id.exercise_notes_EditText)
+            nameEditText = findViewById(R.id.text_exercise_name)
+            notesEditText = findViewById(R.id.text_exercise_notes)
         }
     }
 
@@ -52,7 +52,7 @@ class FinalizeExerciseActivity : AppCompatActivity() {
      * add a custom menu with a delete button
      */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.finalize_activity_menu, menu)
+        menuInflater.inflate(R.menu.finalize_activity, menu)
         return true
     }
 

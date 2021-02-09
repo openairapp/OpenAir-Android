@@ -13,16 +13,17 @@ import kotlinx.coroutines.launch
 class EditExerciseViewModel(application: Application) : AndroidViewModel(application) {
 
     private var repository: AppRepository = AppRepository(application)
-    var exerciseId: Long? = null
-    set(value) {
-        field = value
-        viewModelScope.launch {
-            exercise = repository.getExercise(value!!)
-        }
-    }
     lateinit var exercise: LiveData<Exercise>
 
-    fun saveChanges(name: String, notes: String){
+    var exerciseId: Long? = null
+        set(value) {
+            field = value
+            viewModelScope.launch {
+                exercise = repository.getExercise(value!!)
+            }
+        }
+
+    fun saveChanges(name: String, notes: String) {
         CoroutineScope(Dispatchers.IO).launch {
             repository.updateExercise(exerciseId!!, name, notes)
         }

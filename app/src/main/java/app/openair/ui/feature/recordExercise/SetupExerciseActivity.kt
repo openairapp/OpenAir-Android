@@ -3,7 +3,6 @@ package app.openair.ui.feature.recordExercise
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import app.openair.R
 import app.openair.ui.feature.recordExercise.RecordService.Companion.EXERCISE_ID_EXTRA
+import timber.log.Timber
 
 class SetupExerciseActivity : AppCompatActivity(),
     ActivityCompat.OnRequestPermissionsResultCallback {
@@ -34,7 +34,7 @@ class SetupExerciseActivity : AppCompatActivity(),
         viewModel = ViewModelProvider(this).get(SetupExerciseViewModel::class.java)
 
         setContentView(R.layout.activity_setup_exercise)
-        startButton = findViewById(R.id.start_button)
+        startButton = findViewById(R.id.button_start)
 
         // see if we have play services and location permissions, and request them if we don't
         locationManager = LocationManager(this)
@@ -72,7 +72,7 @@ class SetupExerciseActivity : AppCompatActivity(),
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        Log.d("g53mdp", "permission response received")
+        Timber.d("permission response received")
         // if the permission request gets a response, update the button to match
         // if it is granted this should enable the button and allow the user to continue to tracking their position
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -86,10 +86,7 @@ class SetupExerciseActivity : AppCompatActivity(),
                     (grantResults[locationIndex] == android.content.pm.PackageManager.PERMISSION_GRANTED)
                 locationAvailable = permissionResult
 
-                Log.d(
-                    "g53mdp",
-                    if (permissionResult) "location permission granted by user :)" else "location permissions denied by user >:("
-                )
+                Timber.d(if (permissionResult) "location permission granted by user :)" else "location permissions denied by user >:(")
             }
         }
     }

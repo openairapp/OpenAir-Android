@@ -2,7 +2,6 @@ package app.openair.model.logic
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.work.*
 import app.openair.model.AppRepository
 import io.jenetics.jpx.GPX
@@ -12,6 +11,7 @@ import io.jenetics.jpx.WayPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 class GPXWorker(val context: Context, workerParams: WorkerParameters) :
@@ -22,7 +22,7 @@ class GPXWorker(val context: Context, workerParams: WorkerParameters) :
         const val SAVE_DIRECTORY_URI = "saveUri"
 
         fun schedule(context: Context, exerciseId: Long, fileUri: Uri) {
-            Log.d("g53mdp", "scheduling export for exercise data")
+            Timber.d("scheduling export for exercise data")
             val workRequest = OneTimeWorkRequest.Builder(GPXWorker::class.java)
 
             // pass in the exercise ID
@@ -41,13 +41,10 @@ class GPXWorker(val context: Context, workerParams: WorkerParameters) :
         val fileUri = Uri.parse(inputData.getString(SAVE_DIRECTORY_URI))
         val exerciseData = repository.getExerciseWithLocationsStatic(exerciseId)
 
-        Log.d(
-            "g53mdp",
-            "exporting exercise: id=$exerciseId, name=${exerciseData.exercise.name}, locations=${exerciseData.locations.size}"
-        )
+        Timber.d("exporting exercise: id=$exerciseId, name=${exerciseData.exercise.name}, locations=${exerciseData.locations.size}")
 
         if (exerciseData.locations.isEmpty()) {
-            Log.d("g53mdp", "unable to export exercise with 0 location markers")
+            Timber.w("unable to export exercise with 0 location markers")
             return Result.failure()
         }
 
@@ -57,12 +54,14 @@ class GPXWorker(val context: Context, workerParams: WorkerParameters) :
                 track.addSegment { segment: TrackSegment.Builder ->
 
                     exerciseData.locations.forEach { location ->
-
                         segment.addPoint { p: WayPoint.Builder ->
-                            p.lat(location.latitude)
-                                .lon(location.longitude)
-                                .ele(location.elevation)
-                                .time(location.time)
+
+                            p.apply {
+                                lat(location.latitude)
+                                lon(location.longitude)
+                                ele(location.elevation)
+                                time(location.time)
+                            }
                         }
                     }
                 }
@@ -70,15 +69,15 @@ class GPXWorker(val context: Context, workerParams: WorkerParameters) :
             .build()
 
         CoroutineScope(Dispatchers.IO).launch {
+            @Suppress("BlockingMethodInNonBlockingContext") // we are using the IO coroutine context so it is ok to block
             val outputStream = context.contentResolver.openOutputStream(fileUri)
 
-            @Suppress("BlockingMethodInNonBlockingContext") // we are using the IO coroutine context so it is ok to block
+            @Suppress("BlockingMethodInNonBlockingContext")
             GPX.write(gpx, outputStream)
 
             @Suppress("BlockingMethodInNonBlockingContext")
             outputStream?.close()
         }
-        Log.d("g53mdp", "export complete")
 
         return Result.success()
 

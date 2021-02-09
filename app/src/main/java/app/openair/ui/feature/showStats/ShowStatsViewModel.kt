@@ -20,10 +20,10 @@ import java.util.*
 class ShowStatsViewModel(application: Application) : AndroidViewModel(application) {
 
     private var repository = AppRepository(application)
-    private val statsPeriodKey = application.getString(R.string.preference_statsPeriod_key)
+    private val statsPeriodKey = application.getString(R.string.shared_preference_default_statsPeriod_key)
 
     private val sharedPreferenceHandle: SharedPreferences? = application.getSharedPreferences(
-        application.getString(R.string.preference_stats_key), Context.MODE_PRIVATE
+        application.getString(R.string.shared_preference_key), Context.MODE_PRIVATE
     )
 
     // the current time period that we should show stats charts for

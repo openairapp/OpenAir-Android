@@ -1,34 +1,39 @@
 <resources>
+    <!-- Actions -->
+    <string name="action_delete">Delete</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_discard">Discard</string>
+    <string name="action_finish">Finish</string>
+    <string name="action_save">Save</string>
+
     <!-- App -->
     <string name="app_name">OpenAir</string>
     <!-- Shared Preferences -->
-    <string name="preference_stats_key">app.openair.preference.stats</string>
-    <string name="preference_statsPeriod_key">app.openair.preference.statsPeriod</string>
+    <string name="shared_preference_key">app.openair.PREFERENCE_FILE_KEY</string>
+    <string name="shared_preference_default_statsPeriod_key">app.openair.preference.statsPeriod</string>
 
 
     <!-- Main Activity -->
     <!-- Tabs -->
     <string name="main_tab_exercises">Activities</string>
     <string name="main_tab_stats">Stats</string>
-    <string name="main_tab_records">Achievements</string>
+
 
     <!-- Feature: showExerciseList -->
-    <!-- AppBar -->
-    <string name="showExerciseList_items_selected">%d items selected</string>
-    <string name="showExerciseList_items_deleteDialog_message">Are you sure you wish to delete %d items</string>
-    <string name="showExerciseList_items_deleteDialog_confirm">Delete</string>
-    <string name="showExerciseList_items_deleteDialog_cancel">Cancel</string>
-    <!-- Selection Menu -->
-    <string name="showExerciseList_selectedMenu_clear">Clear Selection</string>
-    <string name="showExerciseList_selectedMenu_delete">Delete Selected</string>
+    <!-- Multi-Select -->
+    <string name="showExerciseList_multiSelect_selectedCount">%d items selected</string>
+    <string name="showExerciseList_multiSelect_menu_actionClear">Clear Selection</string>
+    <string name="showExerciseList_multiSelect_menu_actionDelete">Delete Selected</string>
+    <string name="showExerciseList_multiSelect_deleteDialog_message">Are you sure you wish to delete %d items</string>
+    <string name="showExerciseList_multiSelect_deleteDialog_actionConfirm">Delete</string>
     <!-- Banner -->
-    <string name="showExerciseList_processing_banner_text">Your activity is being processed</string>
-    <string name="showExerciseList_inProgressBanner_text">Activity in progress</string>
+    <string name="showExerciseList_banner_processing_text">Your activity is being processed</string>
+    <string name="showExerciseList_banner_inProgress_text">Activity in progress</string>
     <!-- Recycler -->
-    <string name="showExerciseList_recycler_label_distance">Distance</string>
-    <string name="showExerciseList_recycler_label_duration">Duration</string>
-    <string name="showExerciseList_recycler_label_elevation">Elevation Gain</string>
-    <string name="showExerciseList_recycler_label_speed">Average Speed</string>
+    <string name="showExerciseList_recyclerItem_label_distance">Distance</string>
+    <string name="showExerciseList_recyclerItem_label_duration">Duration</string>
+    <string name="showExerciseList_recyclerItem_label_elevation">Elevation Gain</string>
+    <string name="showExerciseList_recyclerItem_label_speed">Average Speed</string>
     <!-- No Content Message -->
     <string name="showExerciseList_noContent_title">No Activities Found</string>
     <string name="showExerciseList_noContent_message">Use the \'+\' button below to record a new exercise</string>
@@ -36,55 +41,50 @@
 
     <!-- Feature: recordExercise -->
     <string name="recordExercise_defaultExerciseName">Unnamed Activity</string>
-    <!-- Buttons -->
-    <string name="recordExercise_startButton">Start Recording</string>
-    <string name="recordExercise_stopButton">Stop Recording</string>
-    <string name="recordExercise_saveButton">Save</string>
-    <!-- Data item labels -->
-    <string name="recordExercise_currentDurationLabel">Duration</string>
-    <string name="recordExercise_currentSpeedLabel">Speed</string>
-    <string name="recordExercise_currentDistanceLabel">Distance</string>
-    <!-- Form fields -->
-    <string name="recordExercise_exerciseNameFieldLabel">Title</string>
-    <string name="recordExercise_exerciseNotesFieldLabel">Notes</string>
-    <!-- Menu -->
-    <string name="recordExercise_menuOption_discard">Discard</string>
     <!-- Notification -->
     <string name="recordExercise_notification_channelName">Record Exercise</string>
     <string name="recordExercise_notification_title">Tracking your Run</string>
-    <string name="recordExercise_notificationAction_finish">Finish</string>
-    <string name="recordExercise_notificationAction_delete">Discard</string>
+    <!-- Buttons -->
+    <string name="recordExercise_button_start">Start Recording</string>
+    <string name="recordExercise_button_stop">Stop Recording</string>
+    <!-- Data item labels -->
+    <string name="recordExercise_progress_label_duration">Duration</string>
+    <string name="recordExercise_progress_label_speed">Speed</string>
+    <string name="recordExercise_progress_label_distance">Distance</string>
+    <!-- Form fields -->
+    <string name="recordExercise_save_label_name">Title</string>
+    <string name="recordExercise_save_label_notes">Notes</string>
 
 
     <!-- Feature: showSingleExercise -->
     <!-- menu -->
-    <string name="showSingleExercise_menuOption_recalculate">Recalculate Data Values</string>
-    <string name="showSingleExercise_menuOption_export">Save as GPX</string>
-    <string name="showSingleExercise_menuOption_edit">Edit Activity</string>
+    <string name="showSingleExercise_menu_actionExport">Save as GPX</string>
+    <string name="showSingleExercise_menu_actionEdit">Edit Activity</string>
     <!-- labels -->
-    <string name="showSingleExercise_chart_elevation">Elevation</string>
-    <string name="showSingleExercise_chart_speed">Speed</string>
-    <string name="showSingleExercise_notes">Notes</string>
+    <string name="showSingleExercise_label_chart_elevation">Elevation</string>
+    <string name="showSingleExercise_label_chart_speed">Speed</string>
+    <string name="showSingleExercise_label_notes">Notes</string>
     <!-- Map -->
-    <string name="showSingleExercise_mapMarker_start">Start</string>
-    <string name="showSingleExercise_mapMarker_end">End</string>
+    <string name="showSingleExercise_map_marker_start">Start</string>
+    <string name="showSingleExercise_map_marker_end">End</string>
+
 
     <!-- Feature: showStats-->
     <!-- Period Selector Buttons -->
     <string name="showStats_periodSelector_label">Show stats for the last:</string>
-    <string name="showStats_periodSelector_day">Day</string>
-    <string name="showStats_periodSelector_week">Week</string>
-    <string name="showStats_periodSelector_month">Month</string>
-    <string name="showStats_periodSelector_year">Year</string>
+    <string name="showStats_periodSelector_optionDay">Day</string>
+    <string name="showStats_periodSelector_optionWeek">Week</string>
+    <string name="showStats_periodSelector_optionMonth">Month</string>
+    <string name="showStats_periodSelector_optionYear">Year</string>
     <!-- Chart Labels -->
-    <string name="showStats_chart_distance">Distance</string>
-    <string name="showStats_chart_duration">Duration</string>
-    <string name="showStats_chart_elevation">Elevation Gain</string>
-    <string name="showStats_chart_speed">Speed</string>
+    <string name="showStats_label_chart_distance">Distance</string>
+    <string name="showStats_label_chart_duration">Duration</string>
+    <string name="showStats_label_chart_elevation">Elevation Gain</string>
+    <string name="showStats_label_chart_speed">Speed</string>
     <!-- Periodic Totals -->
-    <string name="showStats_distance_total">Total Distance:</string>
-    <string name="showStats_duration_total">Total Duration:</string>
-    <string name="showStats_elevation_total">Total Elevation Gain:</string>
-    <string name="showStats_speed_total">Average Speed:</string>
+    <string name="showStats_label_total_distance">Total Distance:</string>
+    <string name="showStats_label_total_duration">Total Duration:</string>
+    <string name="showStats_label_total_elevation">Total Elevation Gain:</string>
+    <string name="showStats_label_total_speed">Average Speed:</string>
 
 </resources>

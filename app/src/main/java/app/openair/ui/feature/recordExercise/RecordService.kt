@@ -4,7 +4,6 @@ import android.app.*
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import app.openair.R
 import app.openair.getStringResourceByName
@@ -16,6 +15,7 @@ import com.google.android.gms.location.LocationResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.*
 import android.location.Location as AndroidLocation
 
@@ -144,12 +144,12 @@ class RecordService : Service() {
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .addAction(
                 R.drawable.stop_black_24dp,
-                getStringResourceByName("recordExercise_notificationAction_finish"),
+                getStringResourceByName("action_finish"),
                 finishIntent
             )
             .addAction(
                 R.drawable.delete_24dp,
-                getStringResourceByName("recordExercise_notificationAction_delete"),
+                getStringResourceByName("action_delete"),
                 deleteIntent
             )
             .build()
@@ -198,7 +198,7 @@ class RecordService : Service() {
 
     private fun locationCallback(locationResult: LocationResult?) {
         locationResult ?: return
-        Log.v("g53mdp", "location update: ${locationResult.lastLocation}")
+        Timber.v("location update: ${locationResult.lastLocation}")
 
         // discard any bad readings
         val filteredLocations = locationResult.locations
