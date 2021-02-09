@@ -68,9 +68,14 @@ android {
             keyAlias "my-alias"
             storeFile rootProject.file('my-release-key.jks')
 
+            logger.debug("checking for key variables in env")
             if (System.hasProperty('BUILD_KEYSTORE_PASSWORD') && System.hasProperty('BUILD_KEY_PASSWORD') ) {
+                logger.debug("key variables are present")
+
                 keyPassword System.getEnv("BUILD_KEY_PASSWORD")
                 storePassword System.getEnv("BUILD_KEYSTORE_PASSWORD")
+            } else {
+                logger.debug("key variables were not found")
             }
         }
     }
