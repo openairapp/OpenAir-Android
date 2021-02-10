@@ -43,8 +43,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.version.outputs.VERSION_NAME }}
+          tag_name: v${{ steps.version.outputs.VERSION_NAME }}-alpha
           release_name: ${{ steps.version.outputs.VERSION_NAME }}
+          prerelease: true
       - name: Add APK to release
         uses: actions/upload-release-asset@v1
         env:
