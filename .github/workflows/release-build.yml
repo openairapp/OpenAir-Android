@@ -42,6 +42,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset-path: app/build/outputs/apk/release/app-release.apk
-          asset-name: openAir-v${{ steps.version.outputs.VERSION_NAME }}.apk
+          path: app/build/outputs/apk/release/app-release.apk
+          name: openAir-v${{ steps.version.outputs.VERSION_NAME }}.apk
           if-no-files-found: error
