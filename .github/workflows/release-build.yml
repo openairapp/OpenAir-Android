@@ -21,10 +21,18 @@ jobs:
       - name: push artifact
         uses: actions/upload-artifact@v2
         with:
-          name: Package
+          name: Artifacts
           path: |
-            app/build/outputs/apk/release
+            version.properties
+            app/build/outputs/apk/release/app-release.apk
+            app/build/outputs/apk/release/output-metadata.json
             /home/runner/work/OpenAir-Android/OpenAir-Android/app/build/reports
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
       - name: Get Version Name
         id: version
         run: echo "::set-output name=VERSION_NAME::$(cat version.properties | grep VERSION_NAME | awk -F"=" '{print $2}')"
@@ -35,13 +43,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.version.outputs.VERSION_NAME }}
-          release_name: Version ${{ steps.version.outputs.VERSION_NAME }}
+          release_name: ${{ steps.version.outputs.VERSION_NAME }}
       - name: Add APK to release
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          path: app/build/outputs/apk/release/app-release.apk
-          name: openAir-v${{ steps.version.outputs.VERSION_NAME }}.apk
+          asset_path: app-release.apk
+          asset_name: openAir-v${{ steps.version.outputs.VERSION_NAME }}.apk
           if-no-files-found: error
