@@ -68,8 +68,8 @@ android {
             keyAlias "my-alias"
             storeFile rootProject.file('my-release-key.jks')
 
-            keyPassword System.getEnv("BUILD_KEY_PASSWORD")
-            storePassword System.getEnv("BUILD_KEYSTORE_PASSWORD")
+            keyPassword System.getenv("BUILD_KEY_PASSWORD") ?: ""
+            storePassword System.getenv("BUILD_KEYSTORE_PASSWORD") ?: ""
         }
     }
     buildTypes {
