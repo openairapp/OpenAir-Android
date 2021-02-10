@@ -22,7 +22,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Package
-          path: app/build/outputs/apk/release
+          path: |
+            app/build/outputs/apk/release
+            /home/runner/work/OpenAir-Android/OpenAir-Android/app/build/reports
       - name: Get Version Name
         id: version
         run: echo "::set-output name=VERSION_NAME::$(cat version.properties | grep VERSION_NAME | awk -F"=" '{print $2}')"
@@ -34,3 +36,12 @@ jobs:
         with:
           tag_name: ${{ steps.version.outputs.VERSION_NAME }}
           release_name: Version ${{ steps.version.outputs.VERSION_NAME }}
+      - name: Add APK to release
+        uses: actions/upload-artifact@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset-path: app/build/outputs/apk/release/app-release.apk
+          asset-name: openAir-v${{ steps.version.outputs.VERSION_NAME }}.apk
+          if-no-files-found: error
